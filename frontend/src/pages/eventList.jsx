@@ -11,7 +11,7 @@ const EventList = () =>{
         setTimeout( async () => {
             const eventData = await getEvents() 
             setEvents(eventData.events)
-        }, 1000)
+        }, 5000)
     },[])
 
     return(<>

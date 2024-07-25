@@ -3,6 +3,9 @@ import Layout from './pages/layout'
 import EventList from './pages/eventList'
 import RingsList from './pages/ringsList'
 import AddEvent from './pages/addevent'
+import Landing from './pages/landing'
+import Login from './pages/login'
+import Signup from './pages/signup'
 
 
 const App = () =>{
@@ -12,6 +15,9 @@ const App = () =>{
       <Route index element={<EventList/>}/>
       <Route path ="rings" element={<RingsList/>}/>
       <Route path ="addevent" element={<AddEvent/>}/>
+      <Route path ="landing" element={<Landing/>}/>
+      <Route path ="login" element={<Login/>}/>
+      <Route path ="signup" element={<Signup/>}/>
     </Route>
   </Routes>
   </BrowserRouter>
