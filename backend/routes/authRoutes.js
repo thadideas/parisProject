@@ -5,6 +5,6 @@ const router = express.Router()
 
 router.post('/', registerUser)
 
-router.get('/login', loginUser)
+router.post('/login', loginUser)
 
 export {router as authRoutes}

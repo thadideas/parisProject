@@ -34,6 +34,8 @@ const registerUser = async (req, res) =>{
 
 const loginUser = async (req, res) =>{
     console.log(req.body)
+/* 
+    
     const {email, password} = req.body
     if (!email || !password){
         return res.status(400).json({error: "All Fields Required"})
@@ -48,10 +50,11 @@ const loginUser = async (req, res) =>{
     if (!match){
         return res.status(400).json({error: "Incorrect password"})
     }
-
+ */
     try{
-        const token = createToken(gambler._id)
-        res.status(200).json({email, token})
+        res.status(200).json({message: "TEXT"})
+        //const token = createToken(gambler._id)
+        //res.status(200).json({email, token})
     }catch(error){
         res.status(500).json({error: error.message})
     }

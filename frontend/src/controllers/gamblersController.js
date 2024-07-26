@@ -3,16 +3,21 @@ const loginUser = async (email, password) =>{
         throw Error('All fields are required')
     }
 
-    const res = await fetch("/api/auth/login",{
+    console.log("CHECKPOINT 1")
+
+    const res = await fetch("/api/auth/login", {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
         },
         body: JSON.stringify({email, password})
-    })
+    });
+
+    console.log("CHECKPOINT 2")
 
     const data = await res.json()
-
+    console.log(data)
+    
     if (!res.ok){
         throw Error(data.error)
     }
