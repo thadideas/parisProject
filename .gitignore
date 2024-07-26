@@ -1,6 +1,6 @@
 server/node_modules/
 server/cilent/node_modules/
-backend/.env
+server/.env
 text.txt
 server/client/package-lock.json
 server/package-lock.json

@@ -16,7 +16,7 @@ const Login = () =>{
 
         try{
             const data = await loginUser(email, password)
-            setGambler({email, thadBucks:data.thadBucks, _id:data})
+            setGambler({email, thadBucks:data.thadBucks, _id:data._id})
             navigate('/')
         }catch(error){
             setError(error.message)
