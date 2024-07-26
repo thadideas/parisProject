@@ -4,7 +4,7 @@ import defaultFlag from "../assets/images/flags/EOR.svg"
 import { addEntryFront } from "../controllers/addEntryController";
 
 
-const EntryListHandler = (event) => {
+const EntryListHandler = ({event}) => {
     const [error, setError] = useState(null);
     const [flagName, setFlagName] = useState("");
     const [entryName, setEntryName] = useState("");

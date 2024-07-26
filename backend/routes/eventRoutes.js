@@ -1,12 +1,13 @@
 import express from 'express'
 import Event from '../models/eventModel.js';
-import { getEvents } from '../controllers/eventsController.js';
+import { getEvents, getEntry } from '../controllers/eventsController.js';
 import Entry from '../models/entryModel.js';
 
 const router = express.Router()
 
 router.get('/', getEvents);
 
+router.get('/getEntry',getEntry);
 
 router.post('/addevent',async (req,res)=>{
     console.log("FUNCTION CALLED")
@@ -30,7 +31,7 @@ router.post('/addevent',async (req,res)=>{
 })
 
 router.post('/addEntry', async(req,res)=>{
-    const eventQuery = {eventID:req.body.event.event.event.eventID}
+    const eventQuery = {eventID:req.body.event.eventID}
     const eventDocument = await Event.findOne(eventQuery)
 
     const entryName = req.body.name

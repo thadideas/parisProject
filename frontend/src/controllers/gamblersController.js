@@ -3,8 +3,6 @@ const loginUser = async (email, password) =>{
         throw Error('All fields are required')
     }
 
-    console.log("CHECKPOINT 1")
-
     const res = await fetch("/api/auth/login", {
         method: 'POST',
         headers: {
@@ -13,21 +11,44 @@ const loginUser = async (email, password) =>{
         body: JSON.stringify({email, password})
     });
 
-    console.log("CHECKPOINT 2")
-
     const data = await res.json()
-    console.log(data)
     
     if (!res.ok){
         throw Error(data.error)
     }
 
-    console.log(data)
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("email", data.email);
+    return data
 }
 
 const makeNewUser = async (email,gamblerName,password,password2)=>{
+    if (!email || !password|| !gamblerName || !password2){
+        throw Error('All fields are required')
+    }
+
+    if (password !== password2){
+        throw Error("Passwords do not match")
+    }
+
+    const res = await fetch("/api/auth", {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({email,gamblerName,password})
+    });
+
+    const data = await res.json()
     
+    if (!res.ok){
+        throw Error(data.error)
+    }
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("email", data.email);
+    return data
 }
 
-export {loginUser}
+export {loginUser, makeNewUser}
 

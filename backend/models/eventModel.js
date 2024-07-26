@@ -13,11 +13,9 @@ const EventSchema = new mongoose.Schema({
     totalFlamesOnEvent: Number,
     thadBuckMapEvent: {
         type: Map,
-        of: String
     },
     flamesMapEvent:{
         type: Map,
-        of: String
     }
 
 

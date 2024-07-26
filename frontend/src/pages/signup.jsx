@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { makeNewUser } from "../controllers/gamblersController";
+import { GamblerContext } from "../contexts/gamblerContext";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () =>{
+    const {gambler, setGambler} = useContext(GamblerContext)
+    const navigate = useNavigate()
+
     const [error, setError] = useState(null);
     const [email,setEmail] = useState('');
     const [gamblername,setGamblername] = useState('')
     const [password,setPassword] = useState('')
     const [confirmPassword,setConfirmPassword] = useState('')
 
-    const handleSignup = (e) =>{
+    const handleSignup = async (e) =>{
         e.preventDefault();
+        try{
+            const data = await makeNewUser(email, gamblername, password, confirmPassword)
+            console.log(data)
+            setGambler({email, thadBucks:data.thadBucks})
+            navigate('/')
+        }catch(error){
+            setError(error.message)
+        }
         
-
     }
+
     return(<>
             <div className = "bg-sand w-full h-full absolute">
             <div className = "mt-16 absolute w-full">
                 <h2 className = "text-center text-white font-bold m-2">Sign up for a new account</h2>
                 <h2 className = "text-center text-white font-bold m-2 text-sm">You can change your 'Gambler Name' later</h2>
-                <form>
+                <form onSubmit = {handleSignup}> 
                     <input
                         type = "email"
                         placeholder = "Email Address"
@@ -38,7 +52,7 @@ const Signup = () =>{
                         value = {password}
                         onChange={(e) => setPassword(e.target.value)}/>
                     <input
-                        type = "confirmpassword"
+                        type = "password"
                         placeholder = "Confirm Password"
                         className = "block my-2 mx-auto h-8 w-64 rounded-full p-3"
                         value = {confirmPassword}

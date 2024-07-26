@@ -6,12 +6,10 @@ const EntrySchema = new mongoose.Schema({
     countryCode: String,
     countBets: Number,
     thadBuckMapEntry: {
-        type: Map,
-        of: String
+        type: Map
     },
     flamesMapEntry:{
-        type: Map,
-        of: String
+        type: Map
     },
     flamesPerBet: Number,
     place: Number,

@@ -1,12 +1,28 @@
+import { useContext, useEffect, useState } from "react";
+import { GamblerContext } from "../contexts/gamblerContext";
+import { EventContext } from "../contexts/eventContext";
 import convertimage from "../assets/images/convertimage.png"
+import { newBet } from "../controllers/newBetController";
+import { getEntry } from "../../../backend/controllers/eventsController";
+
 
 const convertButtonText = "0.0"
 
-const EntryCard = (entry) =>{
+const EntryCard = ({entryID,event}) =>{
+    const {events, setEvents} = useContext(EventContext)
+    const {gambler, setGambler} = useContext(GamblerContext)
+    const [entry, setEntry] = useState(null)
+
+
+
     const flagSource = "src/assets/images/flags/"+entry.entry.countryCode+".svg"
 
     const replaceImage = (error) => {
         error.target.src = "src/assets/images/flags/EOR.svg";
+    }
+
+    const placeBet = async() => {
+        const data = await newBet(gambler,entry)
     }
 
     return(<>
@@ -16,7 +32,7 @@ const EntryCard = (entry) =>{
                 <h1 className = "text-sm text-wrap">{entry.entry.entryName}</h1>
             </div>
 
-            <button className="bg-summerair h-8 w-32 my-2 rounded-full absolute right-12 hover:bg-blue">
+            <button className="bg-summerair h-8 w-32 my-2 rounded-full absolute right-12 hover:bg-blue" onClick = {placeBet}>
                 <img src = {convertimage} className="h-8 absolute top-0"/>
                 <h1 className="text-white text-left ml-16">{entry.entry.flamesPerBet.toFixed(2)}</h1>
             </button>

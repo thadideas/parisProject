@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from "mongoose";
 import { eventRoutes } from './routes/eventRoutes.js';
 import { authRoutes } from './routes/authRoutes.js';
+import { gameRoutes } from "./routes/gameRoutes.js";
 
 const app = express();
 const uri = process.env.DB_URI;
@@ -12,6 +13,7 @@ app.use(express.json())
 
 app.use('/api/events', eventRoutes)
 app.use('/api/auth', authRoutes )
+app.use('/api/game', gameRoutes)
 
 mongoose.connect(uri)
     .then(()=>{

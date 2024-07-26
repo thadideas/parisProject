@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { loginUser } from "../controllers/gamblersController";
+import { GamblerContext } from "../contexts/gamblerContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () =>{
+    const {gambler, setGambler} = useContext(GamblerContext)
+    const navigate = useNavigate()
+
     const [error, setError] = useState(null);
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('')
 
-    const handleLogin = (e) =>{
+    const handleLogin = async (e) =>{
         e.preventDefault();
 
         try{
-            loginUser(email, password)
+            const data = await loginUser(email, password)
+            setGambler({email, thadBucks:data.thadBucks})
+            navigate('/')
         }catch(error){
             setError(error.message)
         }

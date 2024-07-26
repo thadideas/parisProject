@@ -20,7 +20,7 @@ const EventList = () =>{
             <div className = "static">
                 {events && events.map((event) => (
                     <div key={event._id}>
-                        <EventCard event={event}/>
+                        <EventCard event = {event}/>
                     </div>
                 ))}
             </div>

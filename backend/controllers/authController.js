@@ -3,13 +3,14 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import "dotenv/config.js";
 
-const createToken = (id) =>{
-    return jwt.sign({id},process.env.SECRET, {expiresIn: "7d"})
+const createToken = (_id) =>{
+    return jwt.sign({_id},process.env.SECRET, {expiresIn: "14d"})
 };
 
 const registerUser = async (req, res) =>{
-    const {email, password, gamblerName} = req.body
+    const {email, gamblerName, password} = req.body
     const initialThadBucks = 300
+    const rings = []
 
     if (!email || !password || !gamblerName){
         return res.status(400).json({error: "All Fields Required"})
@@ -24,9 +25,10 @@ const registerUser = async (req, res) =>{
     const hashed = await bcrypt.hash(password,salt)
 
     try{
-        const gambler = await Gambler.create({email, password:hashed, gamblerName, thadBucks:initialThadBucks});
+        const gambler = await Gambler.create({email, password:hashed, gamblerName, thadBucks:initialThadBucks, rings});
         const token = createToken(gambler._id)
-        res.status(200).json({email, token})
+        const thadBucks = initialThadBucks
+        res.status(200).json({email, token, thadBucks})
     } catch (error){
         res.status(500).json({email})
     }
@@ -34,8 +36,7 @@ const registerUser = async (req, res) =>{
 
 const loginUser = async (req, res) =>{
     console.log(req.body)
-/* 
-    
+
     const {email, password} = req.body
     if (!email || !password){
         return res.status(400).json({error: "All Fields Required"})
@@ -50,11 +51,12 @@ const loginUser = async (req, res) =>{
     if (!match){
         return res.status(400).json({error: "Incorrect password"})
     }
- */
+
     try{
-        res.status(200).json({message: "TEXT"})
-        //const token = createToken(gambler._id)
-        //res.status(200).json({email, token})
+        const token = createToken(gambler._id)
+        const thadBucks = gambler.thadBucks
+        
+        res.status(200).json({email, token, thadBucks})
     }catch(error){
         res.status(500).json({error: error.message})
     }

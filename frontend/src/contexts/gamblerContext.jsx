@@ -4,7 +4,8 @@ export const GamblerContext = createContext()
 
 const GamblerProvider = ({children}) => {
     const [ gambler, setGambler] = useState({
-        email: localStorage.getItem('email')
+        email: localStorage.getItem('email'),
+        thadBucks: 300
     })
 
     return (

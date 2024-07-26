@@ -12,6 +12,7 @@ const GamblerSchema = new mongoose.Schema({
     },
     gamblerName: String,
     thadBucks: Number,
+    rings: []
 
 })
 

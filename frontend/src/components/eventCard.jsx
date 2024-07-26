@@ -2,17 +2,18 @@ import { useState } from "react"
 import EntryList from "./entryList"
 
 const EventCard = ({event}) => {
+    const [cardEvent,setCardEvent] = useState(event)
     const [active, setActive] = useState(false);
-    const pictogramSrc = "src/assets/images/pictograms/" + event.discipline + ".svg"
+    const pictogramSrc = "src/assets/images/pictograms/" + cardEvent.discipline + ".svg"
     let nextTime
     let timeText
 
-    if(event.betStatus == 0){
-        nextTime = new Date(event.betCloseTime)
+    if(cardEvent.betStatus == 0){
+        nextTime = new Date(cardEvent.betCloseTime)
         nextTime.setDate(nextTime.getDate()-1)
         timeText = "Betting closes on "
-    }else if(event.betStatus == 1){
-        nextTime = new Date(event.resultsTime)
+    }else if(cardEvent.betStatus == 1){
+        nextTime = new Date(cardEvent.resultsTime)
         timeText = "Results released at "
     }
 
@@ -30,8 +31,8 @@ const EventCard = ({event}) => {
             <div className="bg-white/60 h-12 w-auto rounded-lg relative" onClick={()=>setActive(!active)}>
                 <img src = {pictogramSrc} className="w-10 h-10 m-1 absolute"/>
                 <div className="h-12 ml-14 absolute">
-                    <h1>{event.discipline}</h1>
-                    <h2 className="text-xs">{event.eventName}</h2>
+                    <h1>{cardEvent.discipline}</h1>
+                    <h2 className="text-xs">{cardEvent.eventName}</h2>
                 </div>
 
                 <div className="h-12 absolute right-32 m-1">
@@ -43,7 +44,7 @@ const EventCard = ({event}) => {
                     <h1 className="text-xs text-wrap">{displayTime}</h1>
                 </div>
             </div>
-            {active?<EntryList event ={event}/>:<></>}
+            {active?<EntryList event = {cardEvent}/>:<></>}
         </div>
     </>)
 }
