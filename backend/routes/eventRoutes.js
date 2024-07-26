@@ -1,13 +1,13 @@
 import express from 'express'
 import Event from '../models/eventModel.js';
-import { getEvents, getEntry } from '../controllers/eventsController.js';
+import { getEvents, getSingleEvent } from '../controllers/eventsController.js';
 import Entry from '../models/entryModel.js';
 
 const router = express.Router()
 
 router.get('/', getEvents);
 
-router.get('/getEntry',getEntry);
+router.post('/single',getSingleEvent);
 
 router.post('/addevent',async (req,res)=>{
     console.log("FUNCTION CALLED")
@@ -43,10 +43,10 @@ router.post('/addEntry', async(req,res)=>{
     const place = 0
 
     const newEntry = new Entry({entryName,countryCode,countBets,thadBuckMapEntry,flamesMapEntry,flamesPerBet,place})
+    eventDocument.entriesList.push(newEntry)
     await newEntry.save()
 
     //console.log(eventDocument.entriesList)
-    eventDocument.entriesList.push(newEntry)
     await eventDocument.save()
 
     res.status(200).json({msg:'Post Request'})

@@ -4,15 +4,13 @@ import EntryCard from "./entryCard";
 import EntryListHandler from "./entryListHandler";
 
 
-const EntryList = ({event}) =>{
-    const {events,setEvents} = useContext(EventContext);
-    const [listOfEntries, setListOfEntries] = useState(event.entriesList)
+const EntryList = ({cardEvent,onUpdate}) =>{
 
     return(<>
-        <EntryListHandler event = {event}/>
+        <EntryListHandler cardEvent = {cardEvent} onUpdate = {onUpdate}/>
         <div>
-            {listOfEntries.map((el) => (
-                <EntryCard entry = {el} event = {event}/>
+            {cardEvent.entriesList.map((el) => (
+                <EntryCard entry = {el} cardEvent = {cardEvent} onUpdate = {onUpdate}/>
             ))}
         </div>
     </>)

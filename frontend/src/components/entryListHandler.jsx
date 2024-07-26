@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
 import defaultFlag from "../assets/images/flags/EOR.svg"
 import { addEntryFront } from "../controllers/addEntryController";
+import { EventContext } from "../contexts/eventContext";
+import { getEvents } from "../controllers/getEventsController";
 
 
-const EntryListHandler = ({event}) => {
+const EntryListHandler = ({cardEvent,onUpdate}) => {
+    const {events, setEvents} = useContext(EventContext)
     const [error, setError] = useState(null);
     const [flagName, setFlagName] = useState("");
     const [entryName, setEntryName] = useState("");
@@ -20,11 +22,12 @@ const EntryListHandler = ({event}) => {
 
     const addEntryAction = async (e) =>{
         try{
-            await addEntryFront(event,flagName,entryName)
+            await addEntryFront(cardEvent,flagName,entryName)
+            onUpdate()
         }catch{
             setError(error.message)
         }
-        console.log("SUBMIT")
+        
     }
 
     return(<>

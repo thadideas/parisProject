@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import EntryList from "./entryList"
+import { getSingleEvent } from "../controllers/getEventsController";
 
 const EventCard = ({event}) => {
     const [cardEvent,setCardEvent] = useState(event)
     const [active, setActive] = useState(false);
+    const [error, setError] = useState(null);
     const pictogramSrc = "src/assets/images/pictograms/" + cardEvent.discipline + ".svg"
     let nextTime
     let timeText
@@ -23,8 +25,16 @@ const EventCard = ({event}) => {
         hours = hours - 12
         half = "PM"
     }
-
     const displayTime = timeText+(nextTime.getMonth()+1)+"/"+(nextTime.getDate()+1)+" at "+ hours + half
+
+    const onUpdate = async () =>{
+        try {
+            const data = await getSingleEvent(cardEvent._id);
+            setCardEvent(data.event)
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     return(<>
         <div className ={active?"bg-white/60 m-2 h-auto w-auto rounded-lg relative":"m-2 h-12 w-auto rounded-lg relative"}>
@@ -44,7 +54,7 @@ const EventCard = ({event}) => {
                     <h1 className="text-xs text-wrap">{displayTime}</h1>
                 </div>
             </div>
-            {active?<EntryList event = {cardEvent}/>:<></>}
+            {active?<EntryList cardEvent = {cardEvent} onUpdate = {onUpdate}/>:<></>}
         </div>
     </>)
 }

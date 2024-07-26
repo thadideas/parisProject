@@ -4,7 +4,6 @@ const addEntryFront = async (event,country,name) =>{
         "country": country,
         "name": name,
     }
-    console.log(dataToSend)
     const res = await fetch('/api/events/addEntry',{
         method: 'POST',
         headers: {

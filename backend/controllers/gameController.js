@@ -4,15 +4,16 @@ import Entry from "../models/entryModel.js"
 
 
 const placeBet = async (req, res) =>{
-    const eventBetPlacedIn = await Event.findById(req.body.entry.event.event._id)
+    //console.log(req.body)
+    const eventBetPlacedIn = await Event.findById(req.body.event._id)
     if(eventBetPlacedIn.betStatus > 0){
         return res.status(400).json({error: "Betting Closed"})
     }
 
     const bettingGambler = await Gambler.findOne({email:req.body.gambler.email})
-    const entryBetPlacedIn = await Entry.findById(req.body.entry.entry._id)
+    const entryBetPlacedIn = await Entry.findById(req.body.entry._id)
 
-    console.log(entryBetPlacedIn)
+    //console.log(entryBetPlacedIn)
 
     // 2nd bet free handling
     if (eventBetPlacedIn.thadBuckMapEvent.get(bettingGambler._id) !== 1){
@@ -51,7 +52,9 @@ const placeBet = async (req, res) =>{
         }else{
             foundEntry.flamesPerBet = (eventBetPlacedIn.totalBetsOnEvent+1)/(7*foundEntry.countBets)
         }
+        eventBetPlacedIn.entriesList[entry] = foundEntry
         await foundEntry.save()
+        
     }
 
     await eventBetPlacedIn.save()

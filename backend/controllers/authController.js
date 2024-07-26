@@ -28,7 +28,8 @@ const registerUser = async (req, res) =>{
         const gambler = await Gambler.create({email, password:hashed, gamblerName, thadBucks:initialThadBucks, rings});
         const token = createToken(gambler._id)
         const thadBucks = initialThadBucks
-        res.status(200).json({email, token, thadBucks})
+        const _id = gambler._id
+        res.status(200).json({email, token, thadBucks, _id})
     } catch (error){
         res.status(500).json({email})
     }
@@ -55,8 +56,8 @@ const loginUser = async (req, res) =>{
     try{
         const token = createToken(gambler._id)
         const thadBucks = gambler.thadBucks
-        
-        res.status(200).json({email, token, thadBucks})
+        const _id = gambler._id
+        res.status(200).json({email, token, thadBucks, _id})
     }catch(error){
         res.status(500).json({error: error.message})
     }

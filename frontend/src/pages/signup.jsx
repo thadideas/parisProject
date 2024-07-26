@@ -17,8 +17,7 @@ const Signup = () =>{
         e.preventDefault();
         try{
             const data = await makeNewUser(email, gamblername, password, confirmPassword)
-            console.log(data)
-            setGambler({email, thadBucks:data.thadBucks})
+            setGambler({email, thadBucks:data.thadBucks, _id:data._id})
             navigate('/')
         }catch(error){
             setError(error.message)

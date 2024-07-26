@@ -10,10 +10,14 @@ const getEvents = async (req, res) => {
     }
 }
 
-const getEntry = async (req, res) => {
+const getSingleEvent = async (req, res) => {
+    console.log(req.body)
     try {
-        const entry = await Entry.findById(req.body)
-        res.status(200).json({entry})
+        const event = await Event.findById(req.body._id)
+        if (!event){
+            return res.status(400).json({ error: "Event not found" });
+        }
+        res.status(200).json({event})
     } catch (error){
         res.status(500).json({error: error.message})
     }
@@ -21,4 +25,4 @@ const getEntry = async (req, res) => {
 
 
 
-export {getEvents, getEntry}
+export {getEvents, getSingleEvent}

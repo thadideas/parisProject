@@ -19,6 +19,9 @@ const loginUser = async (email, password) =>{
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("email", data.email);
+    localStorage.setItem("thadBucks", data.thadBucks);
+    localStorage.setItem("_id", data._id);
+
     return data
 }
 
@@ -47,6 +50,9 @@ const makeNewUser = async (email,gamblerName,password,password2)=>{
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("email", data.email);
+    localStorage.setItem("thadBucks", data.thadBucks);
+    localStorage.setItem("_id", data._id);
+    
     return data
 }
 

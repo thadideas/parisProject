@@ -1,4 +1,4 @@
-const newBet = async (gambler,entry) =>{
+const newBet = async (gambler,entry,event) =>{
     if(!gambler.email){
         throw Error('gamblerEmailRequired')
     }
@@ -9,11 +9,8 @@ const newBet = async (gambler,entry) =>{
             Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type' : 'application/json'
         },
-        body: JSON.stringify({gambler,entry})
+        body: JSON.stringify({gambler,entry,event})
     })
-
-    console.log(gambler)
-    console.log(entry)
 
     const data = await res.json();
 
