@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express();
-const uri = "mongodb+srv://thadmegchelsen:<password>@cluster0.xafcuv1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.DB_URI;
 
 app.use(express.json())
 
