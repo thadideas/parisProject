@@ -10,10 +10,10 @@ const EntryCard = ({entry,cardEvent,onUpdate}) =>{
 
     const [flames,setFlames] = useState(entry.flamesMapEntry?entry.flamesMapEntry[gambler._id]?entry.flamesMapEntry[gambler._id]:0:0)
 
-    const flagSource = "src/assets/images/flags/"+entry.countryCode+".svg"
+    const flagSource = "/flags/"+entry.countryCode+".svg"
 
     const replaceImage = (error) => {
-        error.target.src = "src/assets/images/flags/EOR.svg";
+        error.target.src = "/flags/EOR.svg";
     }
 
     const placeBet = async() => {

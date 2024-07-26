@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import defaultFlag from "../assets/images/flags/EOR.svg"
+import defaultFlag from "/flags/EOR.svg"
 import { addEntryFront } from "../controllers/addEntryController";
 import { EventContext } from "../contexts/eventContext";
 import { getEvents } from "../controllers/getEventsController";
@@ -10,10 +10,10 @@ const EntryListHandler = ({cardEvent,onUpdate}) => {
     const [error, setError] = useState(null);
     const [flagName, setFlagName] = useState("");
     const [entryName, setEntryName] = useState("");
-    const [imageSource, setImageSource] = useState("src/assets/images/flags/EOR.svg")
+    const [imageSource, setImageSource] = useState("/flags/EOR.svg")
     const flagEdit = (value) =>{
         setFlagName(value)
-        setImageSource("src/assets/images/flags/"+value.toUpperCase()+".svg")
+        setImageSource("/flags/"+value.toUpperCase()+".svg")
     }
 
     const replaceImage = (error) => {

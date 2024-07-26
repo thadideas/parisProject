@@ -6,7 +6,7 @@ const EventCard = ({event}) => {
     const [cardEvent,setCardEvent] = useState(event)
     const [active, setActive] = useState(false);
     const [error, setError] = useState(null);
-    const pictogramSrc = "src/assets/images/pictograms/" + cardEvent.discipline + ".svg"
+    const pictogramSrc = "/pictograms/" + cardEvent.discipline + ".svg"
     let nextTime
     let timeText
 
@@ -43,11 +43,6 @@ const EventCard = ({event}) => {
                 <div className="h-12 ml-14 absolute">
                     <h1>{cardEvent.discipline}</h1>
                     <h2 className="text-xs">{cardEvent.eventName}</h2>
-                </div>
-
-                <div className="h-12 absolute right-32 m-1">
-                    <h1 className="text-sm">1</h1>
-                    <h1 className="text-sm">2</h1>
                 </div>
 
                 <div className="absolute right-0 w-24 h-10 m-1">
