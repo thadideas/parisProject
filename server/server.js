@@ -12,8 +12,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express();
-const uri = process.env.DB_URI;
-const port = process.env.PORT || 4000
+const uri = "mongodb+srv://thadmegchelsen:<password>@cluster0.xafcuv1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 app.use(express.json())
 
@@ -28,7 +27,7 @@ app.get('*',(req, res) =>res.sendFile(path.join(__dirname,'/client/dist/index.ht
 mongoose.connect(uri)
     .then(()=>{
         console.log("Connected to DB yo");
-        app.listen(4000,()=>console.log("Listening on port 4000"))
+        app.listen(4000,'localhost',()=>console.log("Listening on port 4000"))
     })
     .catch((err)=>console.log(err));
 
