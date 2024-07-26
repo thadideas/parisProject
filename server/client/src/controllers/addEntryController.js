@@ -1,4 +1,8 @@
 const addEntryFront = async (event,country,name) =>{
+    if (!event || !country || !name){
+        throw Error('All fields are required')
+    }
+
     const dataToSend = {
         "event": event,
         "country": country,
