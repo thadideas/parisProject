@@ -62,7 +62,7 @@ const placeBet = async (req, res) =>{
     await bettingGambler.save()
     
 
-    console.log(eventBetPlacedIn)
+    //console.log(eventBetPlacedIn)
     //console.log(entryBetPlacedIn)
     res.status(200).json(newThadBucks)
 
