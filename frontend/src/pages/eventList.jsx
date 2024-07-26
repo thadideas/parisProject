@@ -10,7 +10,7 @@ const EventList = () =>{
     useEffect(()=>{
         setTimeout( async () => {
             const eventData = await getEvents() 
-            setEvents(eventData.events)
+            setEvents(eventData.events.sort((a, b) => a.eventID - b.eventID))
         }, 5000)
     },[])
 

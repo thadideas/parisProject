@@ -8,7 +8,7 @@ const EntryCard = ({entry,cardEvent,onUpdate}) =>{
     const {events, setEvents} = useContext(EventContext)
     const {gambler, setGambler} = useContext(GamblerContext)
 
-    const [flames,setFlames] = useState(entry.flamesMapEntry[gambler._id]?entry.flamesMapEntry[gambler._id]:0)
+    const [flames,setFlames] = useState(entry.flamesMapEntry?entry.flamesMapEntry[gambler._id]?entry.flamesMapEntry[gambler._id]:0:0)
 
     const flagSource = "src/assets/images/flags/"+entry.countryCode+".svg"
 
@@ -17,7 +17,9 @@ const EntryCard = ({entry,cardEvent,onUpdate}) =>{
     }
 
     const placeBet = async() => {
-        await newBet(gambler,entry,cardEvent)
+        const data = await newBet(gambler,entry,cardEvent)
+        localStorage.setItem("thadBucks", data);
+        setGambler({...gambler, thadBucks:data})
         onUpdate()
         console.log(entry.flamesMapEntry)
         console.log(gambler._id)

@@ -10,7 +10,9 @@ const EntryList = ({cardEvent,onUpdate}) =>{
         <EntryListHandler cardEvent = {cardEvent} onUpdate = {onUpdate}/>
         <div>
             {cardEvent.entriesList.map((el) => (
+                <div key = {el._id}>
                 <EntryCard entry = {el} cardEvent = {cardEvent} onUpdate = {onUpdate}/>
+                </div>
             ))}
         </div>
     </>)

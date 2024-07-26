@@ -19,6 +19,7 @@ const placeBet = async (req, res) =>{
     if (eventBetPlacedIn.thadBuckMapEvent.get(bettingGambler._id) !== 1){
         bettingGambler.thadBucks --
     }
+    const newThadBucks = bettingGambler.thadBucks
 
     // Update entry maps
     if (entryBetPlacedIn.thadBuckMapEntry.get(bettingGambler._id)){
@@ -63,7 +64,7 @@ const placeBet = async (req, res) =>{
 
     console.log(eventBetPlacedIn)
     //console.log(entryBetPlacedIn)
-    res.status(200).json({msg:'Post Request'})
+    res.status(200).json(newThadBucks)
 
     //console.log(req.body)
 }
