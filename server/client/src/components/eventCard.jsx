@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import EntryList from "./entryList"
 import { getSingleEvent } from "../controllers/getEventsController";
 
-const EventCard = ({event}) => {
+const EventCard = ({event,filter}) => {
     const [cardEvent,setCardEvent] = useState(event)
     const [active, setActive] = useState(false);
     const [error, setError] = useState(null);
@@ -36,22 +36,26 @@ const EventCard = ({event}) => {
         }
     }
 
-    return(<>
-        <div className ={active?"bg-white/60 m-2 h-auto w-auto rounded-lg relative":"m-2 h-12 w-auto rounded-lg relative"}>
-            <div className="bg-white/60 h-12 w-auto rounded-lg relative" onClick={()=>setActive(!active)}>
-                <img src = {pictogramSrc} className="w-10 h-10 m-1 absolute"/>
-                <div className="h-12 ml-14 absolute">
-                    <h1>{cardEvent.discipline}</h1>
-                    <h2 className="text-xs">{cardEvent.eventName}</h2>
-                </div>
+    if (Number(filter) >= Number(event.betStatus)){
+        return(<>
+            <div className ={active?"bg-white/60 m-2 h-auto w-auto rounded-lg relative":"m-2 h-12 w-auto rounded-lg relative"}>
+                <div className="bg-white/60 h-12 w-auto rounded-lg relative" onClick={()=>setActive(!active)}>
+                    <img src = {pictogramSrc} className="w-10 h-10 m-1 absolute"/>
+                    <div className="h-12 ml-14 absolute">
+                        <h1>{cardEvent.discipline}</h1>
+                        <h2 className="text-xs">{cardEvent.eventName}</h2>
+                    </div>
 
-                <div className="absolute right-0 w-24 h-10 m-1">
-                    <h1 className="text-xs text-wrap">{displayTime}</h1>
+                    <div className="absolute right-0 w-24 h-10 m-1">
+                        <h1 className="text-xs text-wrap">{displayTime}</h1>
+                    </div>
                 </div>
+                {active?<EntryList cardEvent = {cardEvent} onUpdate = {onUpdate}/>:<></>}
             </div>
-            {active?<EntryList cardEvent = {cardEvent} onUpdate = {onUpdate}/>:<></>}
-        </div>
-    </>)
+        </>)
+    } else {
+        return(<></>)
+    }
 }
 
 export default EventCard;

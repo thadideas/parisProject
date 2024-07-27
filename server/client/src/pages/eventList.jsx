@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import EventCard from "../components/eventCard";
 import EventListHandler from "../components/eventListHandler";
 import { getEvents } from "../controllers/getEventsController";
@@ -6,6 +6,7 @@ import { EventContext } from "../contexts/eventContext";
 
 const EventList = () =>{
     const {events,setEvents} = useContext(EventContext);
+    const [filter,setFilter] = useState(0)
 
     useEffect(()=>{
         setTimeout( async () => {
@@ -16,11 +17,11 @@ const EventList = () =>{
 
     return(<>
         <div className="bg-sand absolute mt-16 w-full">
-            <EventListHandler/>
+            <EventListHandler filter = {filter} setFilter = {setFilter}/>
             <div className = "static">
                 {events && events.map((event) => (
                     <div key={event._id}>
-                        <EventCard event = {event}/>
+                        <EventCard event = {event} filter = {filter}/>
                     </div>
                 ))}
             </div>
